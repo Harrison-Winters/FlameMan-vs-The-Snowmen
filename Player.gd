@@ -34,8 +34,12 @@ func _physics_process(delta):
 	direction.y = 0
 	direction = direction.normalized()
 	
-	if Input.is_action_pressed("mouse_escape"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Input.is_action_just_pressed("mouse_escape"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
+		elif Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# makes the speed constatnt
 	if direction != Vector3.ZERO:
