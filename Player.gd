@@ -9,7 +9,7 @@ var bounce_impulse = 16.0
 var velocity = Vector3.ZERO
 
 func _physics_process(delta):
-	$pivot.look_at(get_viewport().get_mouse_position(),Vector3.UP)
+#	$pivot.look_at(get_viewport().get_mouse_position(),Vector3.UP)
 	
 	var direction = Vector3.ZERO # direction starts out at 0
 	# these are functions for controling the characters walking movements
@@ -22,6 +22,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_back"):
 		direction.z +=1
 	
+	if Input.is_action_pressed("mouse_escape"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	# makes the speed constatnt
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
@@ -29,6 +32,8 @@ func _physics_process(delta):
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	velocity = move_and_slide(velocity,Vector3.UP)
+	
+	
 	
 	
 	
