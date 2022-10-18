@@ -13,10 +13,17 @@ var input_axis = Vector2()
 var velocity = Vector3()
 var snap = Vector3()
 var up_direction = Vector3.UP
+onready var bullet = preload("res://Bullet.tscn")
+
 
 
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("shoot"):
+		var b = bullet.instance()
+		$CameraPivot/Camera/Arm/hand.add_child(b)
+		b.shoot = true
+	
 	input_axis = Input.get_vector("move_back", "move_forward",
 			"move_left", "move_right")
 	
@@ -47,7 +54,4 @@ func _physics_process(delta):
 	
 	
 	
-	
-	
-	
-	
+
