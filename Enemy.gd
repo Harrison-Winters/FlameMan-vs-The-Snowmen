@@ -18,6 +18,7 @@ func initialize(start_position, player_position):
 	
 	var random_speed = rand_range(min_speed, max_speed)
 	velocity = Vector3.FORWARD * random_speed
+	velocity.y = 0
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
 
 

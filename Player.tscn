@@ -17,14 +17,16 @@ script = ExtResource( 2 )
 [node name="pivot" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 1 )
 
 [node name="Spatial" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
 [node name="Camera" type="Camera" parent="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549459, -0.578088 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
