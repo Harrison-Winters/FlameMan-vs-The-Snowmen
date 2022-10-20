@@ -37,13 +37,6 @@ func _physics_process(delta):
 	direction.y = 0
 	direction = direction.normalized()
 	
-	if Input.is_action_just_pressed("mouse_escape"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
-		elif Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	# makes the speed constatnt
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
@@ -53,6 +46,11 @@ func _physics_process(delta):
 	velocity.y = 0
 	velocity = move_and_slide(velocity)
 	
-	
-	
+func die():
+	emit_signal("hit")
+	$CameraPivot/Camera/UserInterface/Retry.visible = true
 
+func _on_MobDetector_body_entered(body):
+	Global.lose_life()
+	if Global.lives == 0:
+		die()

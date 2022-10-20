@@ -1,6 +1,5 @@
 extends RigidBody
 
-
 var damage = 50
 var shoot = false
 var speed = 10
@@ -15,4 +14,5 @@ func _physics_process(delta):
 
 
 func _on_Area_body_entered(body):
+	body.queue_free()
 	queue_free()

@@ -76,7 +76,7 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 7 )
 
 [node name="SnowmenTimer" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 0.6
 autostart = true
 
 [node name="SnowmenSpawnPath" type="Path" parent="."]
@@ -87,4 +87,5 @@ curve = SubResource( 11 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.1004, 0, -16.0992 )
 rotation_mode = 1
 
+[connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="timeout" from="SnowmenTimer" to="." method="_on_SnowmenTimer_timeout"]
