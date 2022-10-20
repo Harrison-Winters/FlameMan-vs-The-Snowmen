@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://crosshair.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://Spatial.gd" type="Script" id=3]
 
@@ -11,13 +12,17 @@ albedo_color = Color( 0.45098, 0.984314, 0.223529, 1 )
 [sub_resource type="SphereShape" id=1]
 radius = 0.993322
 
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 0.3, 0.3, 2 )
+
 [node name="Player" type="KinematicBody"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="pivot" type="Spatial" parent="."]
+[node name="CharacterPivot" type="Spatial" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="Character" type="MeshInstance" parent="CharacterPivot"]
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
@@ -25,8 +30,18 @@ material/0 = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 1 )
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="CameraPivot" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="Camera" type="Camera" parent="CameraPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.549459, -0.32619 )
+
+[node name="Arm" type="MeshInstance" parent="CameraPivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.455539, -0.549459, -0.609034 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+
+[node name="hand" type="Spatial" parent="CameraPivot/Camera/Arm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.907289 )
+
+[node name="crosshair" parent="CameraPivot/Camera" instance=ExtResource( 1 )]
