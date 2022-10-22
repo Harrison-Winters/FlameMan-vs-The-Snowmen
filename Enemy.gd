@@ -1,8 +1,8 @@
 extends KinematicBody
 
-
-export var min_speed = 10.0
-export var max_speed = 18.0
+signal shot
+export var min_speed = 7.0
+export var max_speed = 15.0
 
 var velocity = Vector3.ZERO
 
@@ -21,6 +21,9 @@ func initialize(start_position, player_position):
 	velocity.y = 0
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
 
+func shot():
+	emit_signal("shot")
+	queue_free()
 
 func _on_VisibilityNotifier_screen_exited():
 	queue_free()
