@@ -15,7 +15,7 @@ var snap = Vector3()
 var up_direction = Vector3.UP
 onready var bullet = preload("res://Bullet.tscn")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("shoot"):
 		var b = bullet.instance()
 		$CameraPivot/Camera/Arm/hand.add_child(b)
@@ -23,7 +23,7 @@ func _physics_process(delta):
 	input_axis = Input.get_vector("move_back", "move_forward",
 			"move_left", "move_right")
 	
-	var direction = Vector3.ZERO 
+	direction = Vector3.ZERO 
 	var aim: Basis = get_global_transform().basis
 
 	if input_axis.x >= 0.5:
@@ -50,7 +50,7 @@ func die():
 	emit_signal("hit")
 	$CameraPivot/Camera/UserInterface/Retry.visible = true
 
-func _on_MobDetector_body_entered(body):
+func _on_MobDetector_body_entered(_body):
 	Global.lose_life()
 	if Global.lives == 0:
 		die()

@@ -12,7 +12,7 @@ func _unhandled_input(event):
 		Global.lives = Global.max_lives
 		get_tree().reload_current_scene()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("mouse_escape"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
