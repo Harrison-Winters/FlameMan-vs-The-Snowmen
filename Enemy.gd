@@ -3,6 +3,7 @@ extends KinematicBody
 signal shot
 export var min_speed = 7.0
 export var max_speed = 15.0
+var health = 300
 
 var velocity = Vector3.ZERO
 
@@ -27,3 +28,9 @@ func shot():
 
 func _on_VisibilityNotifier_screen_exited():
 	queue_free()
+
+
+func _on_Area_body_entered(body):
+	health = health - 100
+	if health <= 0:
+		queue_free()
