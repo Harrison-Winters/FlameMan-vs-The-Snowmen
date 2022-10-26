@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Bullet.gd" type="Script" id=1]
+[ext_resource path="res://dullflame.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.05
@@ -24,6 +25,9 @@ collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource( 1 )
 
+[node name="flame" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.0180253, 0.499675, 0, -0.499675, 0.0180253, 0, 0, 0 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
@@ -33,6 +37,8 @@ material/0 = SubResource( 3 )
 
 [node name="Area" type="Area" parent="."]
 transform = Transform( 0.999614, 0, -0.0277821, 0, 1, 0, 0.0277821, 0, 0.999614, 0.00856057, 0, 0 )
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 4 )
