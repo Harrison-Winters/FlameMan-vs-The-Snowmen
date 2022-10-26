@@ -9,10 +9,11 @@ func _ready():
 	set_as_toplevel(true)
 
 func _physics_process(_delta):
+	
 	if shoot:
 		apply_impulse(transform.basis.z, -transform.basis.z)
 
 
 func _on_Area_body_entered(body):
-	body.queue_free()
+	
 	queue_free()

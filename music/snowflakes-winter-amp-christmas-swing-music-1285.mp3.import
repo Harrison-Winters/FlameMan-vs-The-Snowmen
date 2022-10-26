@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/snowflakes-winter-amp-christmas-swing-music-1285.mp3-559de0dd95b064e8c7f5710f5e9eab2e.mp3str"
+
+[deps]
+
+source_file="res://music/snowflakes-winter-amp-christmas-swing-music-1285.mp3"
+dest_files=[ "res://.import/snowflakes-winter-amp-christmas-swing-music-1285.mp3-559de0dd95b064e8c7f5710f5e9eab2e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

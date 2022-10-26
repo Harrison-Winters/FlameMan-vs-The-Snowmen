@@ -35,3 +35,5 @@ func _on_SnowmenTimer_timeout():
 func _on_Player_hit():
 	$SnowmenTimer.stop()
 	
+func die_sound():
+	$die.play()
