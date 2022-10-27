@@ -16,7 +16,7 @@ var up_direction = Vector3.UP
 onready var bullet = preload("res://Bullet.tscn")
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and Global.lives > 0:
 		var b = bullet.instance()
 		$CameraPivot/Camera/Arm/hand.add_child(b)
 		b.shoot = true
