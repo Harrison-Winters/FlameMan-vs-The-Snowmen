@@ -20,6 +20,7 @@ func _physics_process(_delta):
 		var b = bullet.instance()
 		$CameraPivot/Camera/Arm/hand.add_child(b)
 		b.shoot = true
+		$AudioStreamPlayer3D.play()
 	input_axis = Input.get_vector("move_back", "move_forward",
 			"move_left", "move_right")
 	
@@ -52,5 +53,7 @@ func die():
 
 func _on_MobDetector_body_entered(_body):
 	Global.lose_life()
+	_body.queue_free()
+	$enemy_hit.play()
 	if Global.lives == 0:
 		die()
