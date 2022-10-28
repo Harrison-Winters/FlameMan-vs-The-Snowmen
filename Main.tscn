@@ -130,7 +130,7 @@ curve = SubResource( 11 )
 transform = Transform( 0.00302562, 0, 0.999995, 0, 1, 0, -0.999995, 0, 0.00302562, -13.1004, 0, -16.0992 )
 rotation_mode = 0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
 
