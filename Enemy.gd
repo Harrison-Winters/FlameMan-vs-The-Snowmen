@@ -44,6 +44,5 @@ func _on_Area_body_entered(body):
 		main.die_sound()
 		body.queue_free()
 		queue_free()
-		
 	else:
 		$hit_sound.play()
