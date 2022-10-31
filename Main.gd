@@ -24,7 +24,7 @@ func _unhandled_input(event):
 		
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and $Player.game_started:
 		pause = !pause
 		
 		

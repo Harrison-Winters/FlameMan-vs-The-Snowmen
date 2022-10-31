@@ -19,7 +19,7 @@ func _physics_process(_delta):
 		move_and_slide(velocity)
 
 #initializes enemy
-func initialize(start_position, player_position):
+func initialize(start_position, _player_position):
 	translation = start_position
 	look_at(player.translation, Vector3.UP)
 	rotate_y(2.3)

@@ -54,12 +54,13 @@ func _physics_process(_delta):
 	
 func die():
 	emit_signal("hit")
+	game_started = false
 	$CameraPivot/Camera/UserInterface/Retry.visible = true
 
-func _on_MobDetector_body_entered(_body):
-	_body.queue_free()
+func _on_MobDetector_body_entered(body):
+	body.queue_free()
 	if (!nux_mode):
 		Global.lose_life()
-		if Global.lives == 0:
+		if Global.lives == 0 and game_started:
 			die()
 		$enemy_hit.play()
