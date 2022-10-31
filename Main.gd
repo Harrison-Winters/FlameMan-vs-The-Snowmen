@@ -10,6 +10,7 @@ func _ready():
 		Global.lives = 10000
 	else:
 		Global.lives = Global.max_lives
+	$Player/CameraPivot/Camera/UserInterface.load_lives()
 	randomize()
 
 func _unhandled_input(event):
@@ -18,6 +19,7 @@ func _unhandled_input(event):
 			Global.lives = Global.max_lives
 		else:
 			Global.lives = 10000
+		$Player/CameraPivot/Camera/UserInterface.load_lives()
 		$BGM.play()
 		get_tree().reload_current_scene()
 
