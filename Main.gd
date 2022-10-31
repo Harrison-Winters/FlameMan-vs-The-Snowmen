@@ -2,7 +2,7 @@ extends Node
 
 export (PackedScene) var snowman_scene = preload("res://Enemy.tscn")
 
-
+var instruction_visible
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +24,8 @@ func _physics_process(_delta):
 		
 		elif Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Input.is_action_just_pressed("continue") and instruction_visible:
+		get_tree().reload_current_scene()
 
 #Spawns enemies randomly in the environment
 func _on_SnowmenTimer_timeout():
@@ -53,3 +55,13 @@ func _on_StartButton_pressed():
 	$GUI/Menu.visible = false
 	$Player.game_started = true
 	$GUI/ViewportContainer.visible = true
+
+
+func _on_InstructionButton_pressed():
+	$GUI/Menu/InstructionMenu.visible = true
+	instruction_visible = true
+	
+
+
+func _on_NuxButton_pressed():
+	pass # Replace with function body.
