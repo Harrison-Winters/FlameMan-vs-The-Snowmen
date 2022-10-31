@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -10,11 +10,26 @@
 [ext_resource path="res://art/flame.png" type="Texture" id=8]
 [ext_resource path="res://art/MarvelRegular-Dj83.ttf" type="DynamicFontData" id=9]
 
-[sub_resource type="Theme" id=18]
+[sub_resource type="Shader" id=18]
 
-[sub_resource type="DynamicFont" id=19]
-size = 90
+[sub_resource type="ShaderMaterial" id=19]
+shader = SubResource( 18 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 70
 font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.490196, 0.0313726, 0.0313726, 1 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.952941, 0.203922, 0.0313726, 1 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.262745, 0.811765, 0.819608, 1 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.27451, 0.133333, 0.713726, 1 )
 
 [sub_resource type="BoxShape" id=9]
 extents = Vector3( 30, 1, 30 )
@@ -87,14 +102,27 @@ scale = Vector2( 0.26971, 0.220539 )
 texture = ExtResource( 8 )
 offset = Vector2( -263.246, -319.672 )
 
-[node name="Button" type="Button" parent="GUI/Menu"]
+[node name="StartButton" type="Button" parent="GUI/Menu"]
+material = SubResource( 19 )
 margin_left = 338.0
 margin_top = 226.0
 margin_right = 697.0
-margin_bottom = 359.0
-theme = SubResource( 18 )
-custom_fonts/font = SubResource( 19 )
+margin_bottom = 327.0
+custom_fonts/font = SubResource( 20 )
+custom_styles/hover = SubResource( 23 )
+custom_styles/normal = SubResource( 21 )
 text = "START"
+
+[node name="NuxButton" type="Button" parent="GUI/Menu"]
+material = SubResource( 19 )
+margin_left = 380.0
+margin_top = 355.0
+margin_right = 656.0
+margin_bottom = 438.0
+custom_fonts/font = SubResource( 20 )
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 22 )
+text = "NUX"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="GUI"]
 visible = false
