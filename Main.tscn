@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -8,11 +8,13 @@
 [sub_resource type="BoxShape" id=9]
 extents = Vector3( 30, 1, 30 )
 
-[sub_resource type="CubeMesh" id=10]
-size = Vector3( 60, 2, 60 )
+[sub_resource type="CylinderMesh" id=20]
+top_radius = 86.331
+bottom_radius = 86.321
+height = 0.001
 
 [sub_resource type="SpatialMaterial" id=16]
-albedo_color = Color( 0.180392, 0.407843, 0.407843, 1 )
+albedo_color = Color( 0.619608, 0.796078, 1, 1 )
 
 [sub_resource type="CylinderMesh" id=14]
 
@@ -47,6 +49,43 @@ _data = {
 "tilts": PoolRealArray( 0, 0, 0, 0, 0 )
 }
 
+[sub_resource type="PanoramaSky" id=19]
+
+[sub_resource type="Environment" id=18]
+background_mode = 1
+background_sky = SubResource( 19 )
+background_color = Color( 0.619608, 0.796078, 1, 1 )
+background_energy = 5.12
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.415686, 0.956863, 0.933333, 1 )
+fog_sun_color = Color( 0.0627451, 0.784314, 0.92549, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 81.0
+fog_transmit_enabled = true
+fog_height_min = 2371.9
+fog_height_max = 342.9
+fog_height_curve = 2.46229
+dof_blur_far_distance = 0.03
+dof_blur_far_transition = 8.4
+dof_blur_far_amount = 0.4
+dof_blur_far_quality = 0
+dof_blur_near_distance = 0.01
+dof_blur_near_transition = 1.2
+dof_blur_near_quality = 0
+glow_enabled = true
+glow_levels/3 = false
+glow_levels/5 = false
+glow_intensity = 0.19
+glow_strength = 2.0
+glow_bloom = 0.31
+glow_hdr_threshold = 0.84
+glow_hdr_luminance_cap = 16.88
+glow_hdr_scale = 1.56
+adjustment_enabled = true
+
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
@@ -64,7 +103,7 @@ collision_mask = 0
 shape = SubResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground"]
-mesh = SubResource( 10 )
+mesh = SubResource( 20 )
 material/0 = SubResource( 16 )
 
 [node name="SafeZone" type="StaticBody" parent="Ground"]
@@ -136,6 +175,9 @@ autoplay = true
 
 [node name="die" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 18 )
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="timeout" from="SnowmenTimer" to="." method="_on_SnowmenTimer_timeout"]

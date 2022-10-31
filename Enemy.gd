@@ -11,10 +11,11 @@ var velocity = Vector3.ZERO
 
 #automatically moves the snowman at random velocities
 func _physics_process(_delta):
-	velocity = (player.translation - translation).normalized()
-	look_at(player.translation, Vector3.UP)
-	rotate_y(2.3)
-	move_and_slide(velocity)
+	if not main.pause:
+		velocity = (player.translation - translation).normalized()
+		look_at(player.translation, Vector3.UP)
+		rotate_y(2.3)
+		move_and_slide(velocity)
 
 #initializes enemy
 func initialize(start_position, player_position):
