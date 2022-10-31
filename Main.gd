@@ -1,6 +1,7 @@
 extends Node
 
 export (PackedScene) var snowman_scene = preload("res://Enemy.tscn")
+var pause = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +25,10 @@ func _unhandled_input(event):
 		get_tree().reload_current_scene()
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		pause = !pause
+		
+		
 	if Input.is_action_just_pressed("mouse_escape"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -40,8 +45,9 @@ func _on_SnowmenTimer_timeout():
 	
 	var player_position = $Player.transform.origin
 	
-	add_child(snowman)
-	snowman.initialize(snowman_spawn_location.translation, player_position)
+	if not pause:
+		add_child(snowman)
+		snowman.initialize(snowman_spawn_location.translation, player_position)
 
 func _on_Player_hit():
 	$SnowmenTimer.stop()

@@ -3,6 +3,7 @@ extends Spatial
 
 export(NodePath) var cam_path := NodePath("Camera")
 onready var cam: Camera = get_node(cam_path)
+onready var main = get_node("/root/Main")
 
 export var mouse_sensitivity := 2.0
 export var y_limit := 90.0
@@ -19,7 +20,8 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_axis = event.relative
-		camera_rotation()
+		if main.pause == false:
+			camera_rotation()
 
 
 func camera_rotation() -> void:
