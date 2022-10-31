@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art/barHorizontal_green_mid 200.png" type="Texture" id=1]
+[ext_resource path="res://HealthBarSnowman2D.gd" type="Script" id=2]
+
+[node name="HealthBarSnowman2D" type="TextureProgress"]
+margin_right = 40.0
+margin_bottom = 40.0
+max_value = 150.0
+step = 50.0
+value = 150.0
+texture_progress = ExtResource( 1 )
+script = ExtResource( 2 )

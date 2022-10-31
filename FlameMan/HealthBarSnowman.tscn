@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://art/barHorizontal_green_mid 200.png" type="Texture" id=1]
+[ext_resource path="res://HealthBarSnowman2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HealthBarSnowman.gd" type="Script" id=4]
+
+[node name="HealthBarSnowman" type="Sprite3D"]
+billboard = 1
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 200, 26 )
+transparent_bg = true
+usage = 0
+render_target_v_flip = true
+
+[node name="HealthBarSnowman2D" parent="Viewport" instance=ExtResource( 2 )]
