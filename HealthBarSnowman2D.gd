@@ -7,8 +7,8 @@ var bar_yellow = preload("res://art/barHorizontal_yellow_mid 200.png")
 func update_bar(amount, full):
 	if amount == full:
 		texture_progress = bar_green
-	elif amount == 200:
-		texture_progress = bar_yellow
 	elif amount == 100:
+		texture_progress = bar_yellow
+	elif amount == 50:
 		texture_progress = bar_red
 	value = amount

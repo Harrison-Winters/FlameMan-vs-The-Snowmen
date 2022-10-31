@@ -3,7 +3,8 @@ extends KinematicBody
 signal shot
 export var min_speed = 7.0
 export var max_speed = 9.0
-var health = 300
+var health = 150
+var max_health
 onready var player = get_node("/root/Main/Player")
 onready var main = get_node("/root/Main")
 
@@ -21,7 +22,9 @@ func initialize(start_position, player_position):
 	translation = start_position
 	look_at(player.translation, Vector3.UP)
 	rotate_y(2.3)
-	
+	if player.nux_mode:
+		health = 50
+	max_health = health
 	var speed = rand_range(min_speed, max_speed)
 	speed = 7
 	velocity = Vector3.FORWARD * speed
@@ -38,8 +41,8 @@ func _on_VisibilityNotifier_screen_exited():
 
 
 func _on_Area_body_entered(body):
-	health -= 100
-	$HealthBarSnowman.update(health, 300)
+	health -= 50
+	$HealthBarSnowman.update(health, max_health)
 	if health <= 0:
 		main.die_sound()
 		body.queue_free()
