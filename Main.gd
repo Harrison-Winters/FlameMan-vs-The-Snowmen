@@ -2,17 +2,20 @@ extends Node
 
 export (PackedScene) var snowman_scene = preload("res://Enemy.tscn")
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$BGM.play()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	randomize()
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("retry") and $Player/CameraPivot/Camera/UserInterface/Retry.visible:
 		Global.lives = Global.max_lives
 		$BGM.play()
 		get_tree().reload_current_scene()
+		
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("mouse_escape"):
@@ -41,3 +44,12 @@ func _on_Player_hit():
 	
 func die_sound():
 	$die.play()
+
+
+func _on_StartButton_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$SnowmenTimer.start()
+	$BGM.play()
+	$GUI/Menu.visible = false
+	$Player.game_started = true
+	$GUI/ViewportContainer.visible = true

@@ -14,38 +14,40 @@ var velocity = Vector3()
 var snap = Vector3()
 var up_direction = Vector3.UP
 onready var bullet = preload("res://Bullet.tscn")
+var game_started = false
 
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("shoot") and Global.lives > 0:
-		var b = bullet.instance()
-		$CameraPivot/Camera/rightHand.add_child(b)
-		b.shoot = true
-		$AudioStreamPlayer3D.play()
-	input_axis = Input.get_vector("move_back", "move_forward",
-			"move_left", "move_right")
-	
-	direction = Vector3.ZERO 
-	var aim: Basis = get_global_transform().basis
+	if game_started:
+		if Input.is_action_just_pressed("shoot") and Global.lives > 0:
+			var b = bullet.instance()
+			$CameraPivot/Camera/rightHand.add_child(b)
+			b.shoot = true
+			$AudioStreamPlayer3D.play()
+		input_axis = Input.get_vector("move_back", "move_forward",
+				"move_left", "move_right")
+		
+		direction = Vector3.ZERO 
+		var aim: Basis = get_global_transform().basis
 
-	if input_axis.x >= 0.5:
-		direction -= aim.z
-	if input_axis.x <= -0.5:
-		direction += aim.z
-	if input_axis.y <= -0.5:
-		direction -= aim.x
-	if input_axis.y >= 0.5:
-		direction += aim.x
-	direction.y = 0
-	direction = direction.normalized()
-	
-	# makes the speed constatnt
-	if direction != Vector3.ZERO:
+		if input_axis.x >= 0.5:
+			direction -= aim.z
+		if input_axis.x <= -0.5:
+			direction += aim.z
+		if input_axis.y <= -0.5:
+			direction -= aim.x
+		if input_axis.y >= 0.5:
+			direction += aim.x
+		direction.y = 0
 		direction = direction.normalized()
-	
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
-	velocity.y = 0
-	velocity = move_and_slide(velocity)
+		
+		# makes the speed constatnt
+		if direction != Vector3.ZERO:
+			direction = direction.normalized()
+		
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+		velocity.y = 0
+		velocity = move_and_slide(velocity)
 	
 func die():
 	emit_signal("hit")

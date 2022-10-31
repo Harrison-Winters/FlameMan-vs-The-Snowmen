@@ -217,7 +217,6 @@ material/0 = SubResource( 7 )
 
 [node name="SnowmenTimer" type="Timer" parent="."]
 wait_time = 1.138
-autostart = true
 
 [node name="SnowmenSpawnPath" type="Path" parent="."]
 transform = Transform( 1.87833, 0, 0, 0, 1, 0, 0, 0, 1.59948, -1.37075, 1, 0 )
@@ -229,10 +228,10 @@ rotation_mode = 0
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-autoplay = true
 
 [node name="die" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
+[connection signal="pressed" from="GUI/Menu/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 [connection signal="timeout" from="SnowmenTimer" to="." method="_on_SnowmenTimer_timeout"]
