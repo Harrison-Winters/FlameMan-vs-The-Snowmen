@@ -3,16 +3,13 @@ extends Node
 export (PackedScene) var snowman_scene = preload("res://Enemy.tscn")
 var pause = false
 
+var instruction_visible
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$BGM.play()
-	if $Player.nux_mode:
-		Global.lives = 10000
-	else:
-		Global.lives = Global.max_lives
-	$Player/CameraPivot/Camera/UserInterface.load_lives()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	randomize()
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("retry") and $Player/CameraPivot/Camera/UserInterface/Retry.visible:
@@ -23,6 +20,7 @@ func _unhandled_input(event):
 		$Player/CameraPivot/Camera/UserInterface.load_lives()
 		$BGM.play()
 		get_tree().reload_current_scene()
+		
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("pause"):
@@ -35,6 +33,8 @@ func _physics_process(_delta):
 		
 		elif Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Input.is_action_just_pressed("continue") and instruction_visible:
+		get_tree().reload_current_scene()
 
 #Spawns enemies randomly in the environment
 func _on_SnowmenTimer_timeout():
@@ -57,6 +57,29 @@ func _on_Player_hit():
 func die_sound():
 	$die.play()
 
+
+func _on_StartButton_pressed():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$SnowmenTimer.start()
+	$BGM.play()
+	$GUI/Menu.visible = false
+	$Player.game_started = true
+	$GUI/ViewportContainer.visible = true
+
+
+func _on_InstructionButton_pressed():
+	$GUI/Menu/InstructionMenu.visible = true
+	instruction_visible = true
+	
+
+
+func _on_NuxButton_pressed():
+  $Player.nux_mode = !$Player.nux_mode
+	if $Player.nux_mode:
+		Global.lives = 10000
+	else:
+		Global.lives = Global.max_lives
+	$Player/CameraPivot/Camera/UserInterface.load_lives()
 
 func _on_MobDetector_body_entered(body):
 	if body != $Player:
