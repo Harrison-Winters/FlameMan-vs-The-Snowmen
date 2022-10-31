@@ -6,8 +6,8 @@
 [node name="HealthBarSnowman2D" type="TextureProgress"]
 margin_right = 40.0
 margin_bottom = 40.0
-max_value = 300.0
-step = 100.0
-value = 300.0
+max_value = 150.0
+step = 50.0
+value = 150.0
 texture_progress = ExtResource( 1 )
 script = ExtResource( 2 )
