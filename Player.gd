@@ -57,6 +57,7 @@ func die():
 	$CameraPivot/Camera/UserInterface/Retry.visible = true
 
 func _on_MobDetector_body_entered(_body):
+	_body.queue_free()
 	if (!nux_mode):
 		Global.lose_life()
 		if Global.lives == 0:
