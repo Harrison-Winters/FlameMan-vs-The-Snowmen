@@ -13,5 +13,6 @@ func load_lives():
 		else:
 			$HPSystem/HeartsEmpty.rect_size.x = Global.max_lives * 53
 			$HPSystem/HeartsFull.rect_size.x = Global.lives * 53
+			$HPSystem/Infinite.visible = false
 	else:
 		$HPSystem/HeartsFull.visible = false
