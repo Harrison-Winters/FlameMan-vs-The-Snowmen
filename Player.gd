@@ -8,7 +8,7 @@ export var gravity_multiplier = 3.0
 export var speed = 10
 export var acceleration = 8
 export var deceleration = 10
-export var nux_mode = true;
+var nux_mode = false;
 var direction = Vector3()
 var input_axis = Vector2()
 var velocity = Vector3()
@@ -20,37 +20,37 @@ var game_started = false
 
 func _physics_process(_delta):
 	if game_started:
-    if main.pause == false:
-      $CameraPivot/Camera/UserInterface/pause_label.text = ("press p to pause.")
-      if Input.is_action_just_pressed("shoot") and Global.lives > 0:
-        var b = bullet.instance()
-        $CameraPivot/Camera/rightHand.add_child(b)
-        b.shoot = true
-        $AudioStreamPlayer3D.play()
-      input_axis = Input.get_vector("move_back", "move_forward",
-        "move_left", "move_right")
-      direction = Vector3.ZERO 
-      var aim: Basis = get_global_transform().basis
+		if main.pause == false:
+			$CameraPivot/Camera/UserInterface/pause_label.text = ("press p to pause.")
+			if Input.is_action_just_pressed("shoot") and Global.lives > 0:
+				var b = bullet.instance()
+				$CameraPivot/Camera/rightHand.add_child(b)
+				b.shoot = true
+				$AudioStreamPlayer3D.play()
+			input_axis = Input.get_vector("move_back", "move_forward",
+			"move_left", "move_right")
+			direction = Vector3.ZERO 
+			var aim: Basis = get_global_transform().basis
 
-      if input_axis.x >= 0.5:
-        direction -= aim.z
-      if input_axis.x <= -0.5:
-        direction += aim.z
-      if input_axis.y <= -0.5:
-        direction -= aim.x
-      if input_axis.y >= 0.5:
-        direction += aim.x
-      direction.y = 0
-      direction = direction.normalized()
-      # makes the speed constant
-      if direction != Vector3.ZERO:
-        direction = direction.normalized()
-      velocity.x = direction.x * speed
-      velocity.z = direction.z * speed
-      velocity.y = 0
-      velocity = move_and_slide(velocity)
-    else : 
-      $CameraPivot/Camera/UserInterface/pause_label.text = ("press p to continue")
+			if input_axis.x >= 0.5:
+				direction -= aim.z
+			if input_axis.x <= -0.5:
+				direction += aim.z
+			if input_axis.y <= -0.5:
+				direction -= aim.x
+			if input_axis.y >= 0.5:
+				direction += aim.x
+			direction.y = 0
+			direction = direction.normalized()
+			# makes the speed constant
+			if direction != Vector3.ZERO:
+				direction = direction.normalized()
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+			velocity.y = 0
+			velocity = move_and_slide(velocity)
+		else: 
+			$CameraPivot/Camera/UserInterface/pause_label.text = ("press p to continue")
 	
 func die():
 	emit_signal("hit")

@@ -8,6 +8,7 @@ var instruction_visible
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$BGM.play()
 	randomize()
 	
 
@@ -61,7 +62,6 @@ func die_sound():
 func _on_StartButton_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$SnowmenTimer.start()
-	$BGM.play()
 	$GUI/Menu.visible = false
 	$Player.game_started = true
 	$GUI/ViewportContainer.visible = true
@@ -74,11 +74,13 @@ func _on_InstructionButton_pressed():
 
 
 func _on_NuxButton_pressed():
-  $Player.nux_mode = !$Player.nux_mode
+	$Player.nux_mode = !$Player.nux_mode
 	if $Player.nux_mode:
 		Global.lives = 10000
+		$GUI/Menu/NuxButton.text = "NUX: ON"
 	else:
 		Global.lives = Global.max_lives
+		$GUI/Menu/NuxButton.text = "NUX: OFF"
 	$Player/CameraPivot/Camera/UserInterface.load_lives()
 
 func _on_MobDetector_body_entered(body):

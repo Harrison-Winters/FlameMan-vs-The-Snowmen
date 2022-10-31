@@ -6,7 +6,6 @@ func _ready():
 
 func load_lives():
 	if Global.lives != 0:
-		print(Global.lives)
 		if Global.lives == 10000:
 			$HPSystem/HeartsEmpty.rect_size.x = 53
 			$HPSystem/HeartsFull.rect_size.x = 53
