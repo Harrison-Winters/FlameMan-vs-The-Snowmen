@@ -7,11 +7,20 @@ var pause = false
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$BGM.play()
+	if $Player.nux_mode:
+		Global.lives = 10000
+	else:
+		Global.lives = Global.max_lives
+	$Player/CameraPivot/Camera/UserInterface.load_lives()
 	randomize()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("retry") and $Player/CameraPivot/Camera/UserInterface/Retry.visible:
-		Global.lives = Global.max_lives
+		if !$Player.nux_mode:
+			Global.lives = Global.max_lives
+		else:
+			Global.lives = 10000
+		$Player/CameraPivot/Camera/UserInterface.load_lives()
 		$BGM.play()
 		get_tree().reload_current_scene()
 
@@ -47,3 +56,10 @@ func _on_Player_hit():
 	
 func die_sound():
 	$die.play()
+
+
+func _on_MobDetector_body_entered(body):
+	if body != $Player:
+		if $Player.nux_mode:
+			body.queue_free()
+			$Player/enemy_hit.play()

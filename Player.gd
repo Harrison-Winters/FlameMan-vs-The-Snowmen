@@ -15,6 +15,7 @@ var snap = Vector3()
 var up_direction = Vector3.UP
 onready var bullet = preload("res://Bullet.tscn")
 onready var main = get_node("/root/Main")
+export var nux_mode = true;
 
 
 func _physics_process(_delta):
@@ -58,8 +59,8 @@ func die():
 	$CameraPivot/Camera/UserInterface/Retry.visible = true
 
 func _on_MobDetector_body_entered(_body):
-	Global.lose_life()
-	_body.queue_free()
-	$enemy_hit.play()
-	if Global.lives == 0:
-		die()
+	if (!nux_mode):
+		Global.lose_life()
+		if Global.lives == 0:
+			die()
+		$enemy_hit.play()
